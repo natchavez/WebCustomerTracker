@@ -2,6 +2,8 @@ package com.nathaniel.springdemo.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nathaniel.springdemo.entity.Customer;
@@ -30,6 +32,23 @@ public class CustomerController {
 		theModel.addAttribute("customers", theCustomers);
 
 		return "list-customers";
-
+	}
+	
+	@GetMapping("/showFormForAdd")
+	public String showFormForAdd(Model theModel) {
+		
+		// create model attribute to bind form data;
+		Customer theCustomer = new Customer();
+		theModel.addAttribute("customer", theCustomer);
+		return "customer-form";
+	}
+	
+	@PostMapping("/saveCustomer")
+	public String saveCustomer(@ModelAttribute("customer") Customer theCustomer) {
+		
+		// save the customer using our service
+		customerService.saveCustomer(theCustomer);
+		
+		return "redirect:/customer/list";
 	}
 }
