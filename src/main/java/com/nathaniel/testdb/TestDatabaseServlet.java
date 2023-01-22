@@ -29,7 +29,7 @@ public class TestDatabaseServlet extends HttpServlet {
 		String jdbcUrl = "jdbc:mysql://localhost:3306/web_customer_tracker?useSSL=false";
 		String driver = "com.mysql.jdbc.Driver";
 
-		// get connection to database
+		// get connection to database it
 		try {
 			PrintWriter out = response.getWriter();
 			out.println("Connecting to database: " + jdbcUrl);
